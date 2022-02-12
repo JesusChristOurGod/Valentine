@@ -1,17 +1,14 @@
-// Daniel Shiffman
-// http://codingtra.in
-// http://patreon.com/codingtrain
-// Code for: https://youtu.be/QHEQuoIKgNE
 
 ArrayList<Circle> circles;
 ArrayList<PVector> spots;
 PImage img;
 int ranTotal;
+boolean go = false;
 
 void setup() {
-  size(700, 700);
+  size(800, 800);
   spots = new ArrayList<PVector>();
-  translate(width/2, height/2);
+  
   img = loadImage("black-heart-hi.png");
   img.loadPixels();
   for (int x = 0; x < img.width; x++) {
@@ -27,12 +24,27 @@ void setup() {
   }
   circles = new ArrayList<Circle>();
   colorMode(HSB, 360,100,100);
-  ranTotal = int(random(1,10));
+  ranTotal = int(random(1,3));
+  frameRate(30);
+  //translate((width-img.width)/2, (height-img.height)/2);
+}
+
+void mouseClicked(){
+
+Circle start = new Circle(mouseX, mouseY, 45);
+//print((width-img.width)/2, " ");
+//print((height-img.height)/2, " ");
+//print(mouseX," ", mouseY);
+
+circles.add(start);
+go = true;
 }
 
 void draw() {
-  
+  //translate((width-img.width)/2, (height-img.height)/2);
   background(360,0,100);
+  if (go){
+  
 
   int total = ranTotal;
   int count = 0;
@@ -73,6 +85,7 @@ void draw() {
     c.grow();
   }
 }
+}
 
 Circle newCircle() {
   
@@ -91,7 +104,7 @@ Circle newCircle() {
   }
 
   if (valid) {
-    return new Circle(x, y);
+    return new Circle(x, y, 3);
   } else {
     return null;
   }
