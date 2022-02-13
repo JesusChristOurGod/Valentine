@@ -4,9 +4,11 @@ ArrayList<PVector> spots;
 PImage img;
 int ranTotal;
 boolean go = false;
+float mX, mY; // mouse X and Y
 
 void setup() {
   size(800, 800);
+  frameRate(120);
   spots = new ArrayList<PVector>();
   
   img = loadImage("black-heart-hi.png");
@@ -31,7 +33,9 @@ void setup() {
 
 void mouseClicked(){
 
-Circle start = new Circle(mouseX, mouseY, 45);
+mX = mouseX;
+mY= mouseY;
+Circle start = new Circle(mX, mY, 45);
 //print((width-img.width)/2, " ");
 //print((height-img.height)/2, " ");
 //print(mouseX," ", mouseY);
@@ -91,8 +95,8 @@ Circle newCircle() {
   
   int r = int(random(0,spots.size()));
   PVector spot = spots.get(r);
-  float x = spot.x;
-  float y = spot.y;
+  float x = spot.x + mX - img.width / 2;
+  float y = spot.y+ mY - img.height / 2;
 
   boolean valid = true;
   for (Circle c : circles) {
@@ -104,7 +108,7 @@ Circle newCircle() {
   }
 
   if (valid) {
-    return new Circle(x, y, 3);
+    return new Circle(x , y , 3);
   } else {
     return null;
   }
