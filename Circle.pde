@@ -10,7 +10,7 @@ class Circle {
     x = x_;
     y = y_;
     r = r_;
-    clr = color(random(270,360),random(60,90),random(80,100));
+    clr = color(random(270,360),random(60,90),random(95,100));
   }
 
   void grow() {
